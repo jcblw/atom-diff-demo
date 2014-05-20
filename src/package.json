@@ -1,0 +1,9 @@
+{
+  "name": "diff-demo",
+  "version": "0.0.0",
+  "main": "main.js",
+  "author": "Jacob Lowe",
+  "dependencies": {
+    "gaze": "~0.6.4"
+  }
+}

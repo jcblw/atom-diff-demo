@@ -1,0 +1,17 @@
+<!doctype html>
+<title>Diff Demo</title>
+<body id="app">
+  <h1>diff-demo</h1>
+  <p class="diff"></p>
+  <script>
+    var app = require('app'),
+        diff = document.getElementsByClassName('diff');
+
+    app.on('diffChunk', function( data ){
+        var span = document.creaateElement('span');
+        span.innerText = data.toString('utf8');
+        diff.appendChild( span );
+    });
+    
+  </script
+</body>
