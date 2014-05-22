@@ -4,11 +4,11 @@
 
 var app = require('app'), 
     BrowserWindow = require('browser-window'),
-    file = './TODO.md',
-    // gaze = require('gaze'),
+    file = __dirname + '/TODO.md',
+    fs = require('fs'),
     spawn = require('child_process').spawn,
-    // todo = gaze ( file ); 
-    curDiff = ''
+    EventEmitter = require('events').EventEmitter,
+    curDiff = '',
     _window;
 
 /* 
@@ -19,20 +19,27 @@ var app = require('app'),
     - spit the output to DOM
 */
 
-
-// todo.on('change', function(){
-//     var diff = spawn('git', ['diff', file]);
-//     diff.on('data', app.emit.bind( app, 'diffChunk' ));
-// });
+fs.watchFile( file, function( ) {
+    app.emit('diff:change');
+    var diff = spawn('git', ['diff', 'src/TODO.md']);
+    diff.stdout.on('data', function( data ) {
+        var output = data.toString('utf8'),
+            lines = output.split('\n');
+        lines.forEach(function(line){
+            app.emit( 'diff:chunk', line);
+        });
+    });
+    diff.on('end', app.emit.bind( app, 'diff:end') );
+})
 
 // reports crashes to github
 require('crash-reporter');
 
 app.on( 'ready', function ( ) {
-    
+    console.log('app ready in', process.cwd()); 
     var mainWindow = new BrowserWindow({ 
-      width : 200, 
-      height : 400 
+      width : 500, 
+      height : 500 
     });
 
     mainWindow.loadUrl('file://' + __dirname + '/index.html');
@@ -41,5 +48,12 @@ app.on( 'ready', function ( ) {
         mainWindow = null;
     });
 
+    _window = mainWindow;
+
 });
+
+app.on('open:devtools', function( ){
+    if ( !_window ) return;
+    _window.openDevTools();   
+})
 
