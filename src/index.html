@@ -1,53 +1,40 @@
 <!doctype html>
 <title>Diff Demo</title>
-<style>
-    .line {
-        width: 100%;
-        margin: 0;
-        padding: 5px 10px;
-    }
-    .addition { 
-        background: rgba(71,178,126,.3); 
-        color: rgb(71,178,126);
-    }  
-    .subtraction {
-        background-color: rgba(205,81,57,.3);
-        color: rgb(205,81,57);
-    }
-    .no-change {
-        background-color: rgba(103,110,123,.3);
-        color: rgb(103,110,123);
-    }
-</style>
-<body id="app">
-    <h1>diff-demo</h1>
-    <div class="diff"></div>
-    <script>
-        var background = require('remote'),
-            app = background.require('app'),
-            diff = document.getElementsByClassName('diff')[0];
-        app.on('diff:change', function ( ) {
-            diff.innerHTML = '';
-            app.emit('open:devtools');
-        });
-        app.on('diff:chunk', function( data ) {
-            var div = document.createElement('div'),
-                good;
-            div.classList.add('line');
-            div.innerText = data;
-            if ( /^(\+)(?!\+\+)/.test( data ) ){
-              good = true;
-              div.classList.add('addition');
-            }
-            if ( /^\s/.test( data ) ){
-              good = true;
-              div.classList.add('no-change');
-            }
-            if ( /^(\-)(?!\-\-)/.test( data ) ){
-              good = true;
-              div.classList.add('subtraction');
-            }
-            if ( good ) diff.appendChild( div );
-        });
-    </script>
-</body>
+<link href="./css/style.css" type="text/css" rel="stylesheet" />
+<h1>changes to TODO.md</h1>
+<div class="diff"></div>
+<script>
+
+    var background = require('remote'),
+        app = background.require('app'),
+        diff = document.getElementsByClassName('diff')[0];
+
+    // initial event to clear exsisting html
+    app.on('diff:change', function ( ) {
+        diff.innerHTML = '';
+        app.emit('open:devtools');
+    });
+
+    // each line of diff
+    app.on('diff:chunk', function( data ) {
+        var div = document.createElement('div'),
+            good;
+        div.classList.add('line');
+        div.innerText = data;
+        /* parsing stuff not the best implementation */
+        if ( /^(\+)(?!\+\+)/.test( data ) ){
+          good = true;
+          div.classList.add('addition');
+        }
+        if ( /^\s/.test( data ) ){
+          good = true;
+          div.classList.add('no-change');
+        }
+        if ( /^(\-)(?!\-\-)/.test( data ) ){
+          good = true;
+          div.classList.add('subtraction');
+        }
+        if ( good ) diff.appendChild( div );
+    });
+</script>
+

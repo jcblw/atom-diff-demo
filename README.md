@@ -1,7 +1,5 @@
 ## Diff Demo
 
-This is a baseline app that pretty much is the instructions that are given on in [Atom-Shell's Getting Started](https://github.com/atom/atom-shell/blob/master/docs/tutorial/quick-start.md)
-
 First you will need [atom-shell](https://github.com/atom/atom-shell), macs have a prebuilt binary, but everyone else read you os's documentation in the [development docs](https://github.com/atom/atom-shell/tree/master/docs/development).
 
 ## Installation
@@ -12,17 +10,17 @@ To install the this app just clone this repo and enter the directory.
 
 ## Running 
 
-To run the app its super simple just run the atom binary given to you while installing [atom-shell](https://github.com/atom/atom-shell) against the `application` directory.
+To run the app its super simple just run the atom binary given to you while installing [atom-shell](https://github.com/atom/atom-shell) against the `src` directory.
 
     $ ~/path-to/atom src
 
-A window will open with the version of NodeJS and atom-shell
+A window will open with a header of "changes to TODO.md" now edit and save `src/TODO.md` and the window for atom shell should update showing the diff of that file. Note atom must be ran right outside of the src file in the `diff-demo` file due to some of the pathing in the app.
 
 ## Development
 
 To build on the the app all the files reside in the `application` directory.
 
-    
+    diff-demo
     └── src
         ├── package.json
         ├── main.js*
