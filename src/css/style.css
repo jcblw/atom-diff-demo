@@ -1,0 +1,31 @@
+body {
+    font-family: 'Ubuntu Mono', monospace;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+h1 {
+    padding-left: 10px;
+    color: rgb(103,110,123);
+}
+
+.line {
+    width: 100%;
+    margin: 0;
+    padding: 5px 10px;
+    font-size: 18px;
+}
+.addition { 
+    background: rgba(71,178,126,.3); 
+    color: rgb(71,178,126);
+}  
+.subtraction {
+    background-color: rgba(205,81,57,.3);
+    color: rgb(205,81,57);
+}
+.no-change {
+    padding-left: 19px;
+    background-color: rgba(103,110,123,.3);
+    color: rgb(103,110,123);
+}
