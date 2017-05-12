@@ -1,5 +1,7 @@
 ## Atom Diff Demo
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/jcblw/atom-diff-demo.svg)](https://greenkeeper.io/)
+
 First you will need [atom-shell](https://github.com/atom/atom-shell), macs have a prebuilt binary, but everyone else read you os's documentation in the [development docs](https://github.com/atom/atom-shell/tree/master/docs/development).
 
 ## Installation
